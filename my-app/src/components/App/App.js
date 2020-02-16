@@ -10,8 +10,8 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import './App.css';
 // Component
-import Add from './Add/Add';
-import List from './List/List';
+import Add from '../Add/Add';
+import List from '../List/List';
 
 
 

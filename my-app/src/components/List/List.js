@@ -6,7 +6,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 // component
-import Real from './Real/Real';
+import Real from '../Real/Real';
 
 export default function List() {
   let match = useRouteMatch();
