@@ -6,8 +6,14 @@ const BtnSender = props => {
     const [text, setText] = useState("Submit");
 
     useEffect(() => {
-        if(props.send){
+        if(props.send === true){
             setText("Envoyé")
+            setTimeout(() => {
+                setText("Submit")
+            }, 600);
+        }
+        else if(props.send === "error"){
+            setText("Empty")
             setTimeout(() => {
                 setText("Submit")
             }, 600);

@@ -1,4 +1,4 @@
-import React,  { useEffect, useState, useRef }  from "react";
+import React,  { useEffect, useRef }  from "react";
 import Hammer from 'hammerjs';
 import './AddViews.css';
 import Button from '@material-ui/core/Button';
@@ -36,7 +36,6 @@ const AddViews = () => {
                     document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
                   }  
             }else{
-                console.log(`${ref.current}`)
                 document.querySelector("#views").classList.add("no-transi")
                 document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
             }
@@ -51,7 +50,6 @@ const AddViews = () => {
                     document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
                   }  
             }else{
-                console.log(`${ref.current}`)
                 document.querySelector("#views").classList.add("no-transi")
                 document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
             }

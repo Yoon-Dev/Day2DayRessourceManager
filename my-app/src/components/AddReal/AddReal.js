@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 // component
 import SelectFood from '../SelectFood/SelectFood';
 import ExtensibleInput from '../ExtensibleInput/ExtensibleInput';
@@ -14,6 +14,7 @@ const AddReal = () => {
 // option default value 
   const [value, setValue] = useState('');
   const [send, setSend] = useState(false);
+  const dataid = useRef("extin")
   // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // Onchange event of select input
@@ -28,15 +29,21 @@ const AddReal = () => {
 // Onclcik btn event, the data for the Real/Add endpoint on the API 
     const throwData = () => {
 
-    let data = document.querySelector('#extin').value
+    let data = document.querySelector(`#${dataid.current}`).value
     if(data){
-        fetch('http://apires.localhost/src/RealAdd.php?nom='+data).then(() =>{
-        setSend(true)
-        setValue('')
-        document.querySelector('#extin').value = ''
-        })
+      fetch('http://apires.localhost/src/RealAdd.php?nom='+data).then(() =>{
+      setSend(true)
+      setValue('')
+      document.querySelector(`#${dataid.current}`).value = ''
+      })
+    }else{
+      setSend('error')
     }
-    setSend(false)
+      setTimeout(() => {
+        setSend(false)     
+      }, 200);
+
+    
 
   }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -44,7 +51,7 @@ const AddReal = () => {
     return(
         <div className="view"  id="add-real">
           <SelectFood value={value} Change={handleChange}/>
-          <ExtensibleInput value={value}/>
+          <ExtensibleInput value={value} id={dataid.current} placeholder="Liste de course"/>
           <BtnSender send={send} Click={throwData}/>
         </div>
     ); 
