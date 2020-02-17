@@ -4,7 +4,7 @@ import React    from "react";
 const AddOnline = () => {
 
     return(
-      <div className="view">
+      <div className="view" id="add-online">
         <h1>AddOnline</h1>
       </div>
       
