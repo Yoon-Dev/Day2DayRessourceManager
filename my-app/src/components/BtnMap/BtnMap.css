@@ -1,0 +1,21 @@
+#btns{
+    z-index: 999;
+    top: 0;
+    min-width: 100vw;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-add{
+    transition: background-color, color,  .3s ease !important;
+}
+
+.btn-off{
+    color: whitesmoke !important;
+}
+
+.btn-active{
+    color: white !important;
+    background-color: #757043 !important;
+}

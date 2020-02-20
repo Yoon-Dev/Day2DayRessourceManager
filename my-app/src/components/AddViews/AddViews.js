@@ -1,17 +1,17 @@
-import React,  { useEffect, useRef }  from "react";
+import React,  { useEffect, useRef, useState }  from "react";
 import Hammer from 'hammerjs';
 import './AddViews.css';
-import Button from '@material-ui/core/Button';
 // component
 import AddReal from '../AddReal/AddReal';
 import AddOnline from '../AddOnline/AddOnline';
+import BtnMap from '../BtnMap/BtnMap';
 
 const AddViews = () => {
 
 
-    // const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState(0);
     // const [tabView, setTabView] = useState({0: "#add-real", 1: "#add-online"});
-    const ref = useRef(0);
+    const ref = useRef(current);
     const nbr_views = useRef(2)
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -63,8 +63,7 @@ const AddViews = () => {
             if(Math.abs(e.deltaX) > (window.innerWidth/3) && ref.current < (nbr_views.current -1) && e.deltaX < 0){
               nav(ref.current+1)
             }else if(e.deltaX < 0){
-              // derniere page
-              document.querySelector("#views").style.transform = "translateX("+(-ref.current) * window.innerWidth+"px)";
+                document.querySelector("#views").style.transform = "translateX("+(-ref.current) * window.innerWidth+"px)";     
             }
             // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
             // Gauche
@@ -83,26 +82,34 @@ const AddViews = () => {
     const nav = target => {
 
         let destination = -target * window.innerWidth
-        const btn = document.querySelectorAll('.btn-add')
-        btn.forEach(el => {
-            el.style.transform = "translateX("+(-destination)+"px)";
-        })
+
         document.querySelector('#views').style.transform = "translateX("+destination+"px)";
         ref.current = target
+        setCurrent(target)
+        console.log(ref.current)
 
     }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// change target value on swipe
+    const fcttarget = target => {
+
+        setCurrent(target)
+
+    }
+
     
     return(
-      <div id="views">
-        <Button className="btn-add" onClick={() =>{nav(0)}}>Real</Button>
-        <Button className="btn-add" onClick={() =>{nav(1)}}>Online</Button>
-        <AddReal/>
-        <AddOnline/>
-      </div>
+        <div>
+            <div id="views">
+                <AddReal/>
+                <AddOnline/>
+            </div>
+            <BtnMap click={nav} fcttarget={fcttarget} target={current}/>
+        </div>
 
-    ); 
-  
+    );
+
 }
-
 
 export default AddViews;

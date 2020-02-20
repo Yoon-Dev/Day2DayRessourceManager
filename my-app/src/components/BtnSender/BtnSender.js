@@ -1,10 +1,16 @@
 import React, { useEffect, useState }from "react";
 import Button from '@material-ui/core/Button';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const BtnSender = props => {
 
     const [text, setText] = useState("Submit");
-
+    const useStyles = makeStyles((theme) => createStyles({
+        bg: {
+            backgroundColor: '#C2B548'
+        },
+      }));
+      const bgbtn = useStyles();
     useEffect(() => {
         if(props.send === true){
             setText("Envoyé")
@@ -23,7 +29,7 @@ const BtnSender = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
-        <Button variant="contained" color="primary" onClick={props.Click} >
+        <Button variant="contained" className={bgbtn.bg} onClick={props.Click} >
             {text}
         </Button> 
     )

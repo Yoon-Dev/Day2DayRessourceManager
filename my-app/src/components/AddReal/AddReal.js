@@ -3,7 +3,8 @@ import React, {useState, useRef} from "react";
 import SelectFood from '../SelectFood/SelectFood';
 import ExtensibleInput from '../ExtensibleInput/ExtensibleInput';
 import BtnSender from '../BtnSender/BtnSender';
-
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 // lorsque l’on modifie une variable d’état sa valeur est remplacée et non fusionnée, contrairement à this.setState dans les classes.
 
 
@@ -15,6 +16,13 @@ const AddReal = () => {
   const [value, setValue] = useState('');
   const [send, setSend] = useState(false);
   const dataid = useRef("extin")
+  const useStyles = makeStyles((theme) => createStyles({
+    root: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+  }));
+  const classes = useStyles();
   // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // Onchange event of select input
@@ -50,9 +58,17 @@ const AddReal = () => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         <div className="view"  id="add-real">
-          <SelectFood value={value} Change={handleChange}/>
-          <ExtensibleInput value={value} id={dataid.current} placeholder="Liste de course"/>
-          <BtnSender send={send} Click={throwData}/>
+          <Grid container spacing={3} justify="center" alignItems="center">
+            <Grid className={classes.root} item xs={12}>
+              <SelectFood value={value} Change={handleChange}/>
+            </Grid>
+            <Grid className={classes.root} item xs={12}>
+              <ExtensibleInput value={value} id={dataid.current} placeholder="Liste de course"/>
+            </Grid>
+            <Grid className={classes.root} item xs={12}>
+              <BtnSender send={send} Click={throwData}/>
+            </Grid>
+          </Grid>
         </div>
     ); 
   

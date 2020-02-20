@@ -1,3 +1,17 @@
 #views{
+    transition: all .4s cubic-bezier(0.39, 0.58, 0.57, 1);;
     min-height: 100vh;
 }
+
+.no-transi{
+    transition: all 0s !important;
+}
+
+.view{
+    z-index: 99;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    position: absolute;
+}
+

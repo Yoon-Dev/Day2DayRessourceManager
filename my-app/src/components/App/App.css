@@ -2,3 +2,17 @@ html, body{
   overflow: hidden;
   min-height: 100vh;
 }
+
+#App{
+  background: #2b5876;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+.appnavigation{
+  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  min-width: 100vw;
+}
