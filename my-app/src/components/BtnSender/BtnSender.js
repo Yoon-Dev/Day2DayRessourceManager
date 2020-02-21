@@ -7,7 +7,8 @@ const BtnSender = props => {
     const [text, setText] = useState("Submit");
     const useStyles = makeStyles((theme) => createStyles({
         bg: {
-            backgroundColor: '#C2B548'
+            backgroundColor: '#C2B548',
+            boxShadow: "7px 7px 15px 2px #67676773, -7px -7px 15px 2px #ffffffe8"
         },
       }));
       const bgbtn = useStyles();

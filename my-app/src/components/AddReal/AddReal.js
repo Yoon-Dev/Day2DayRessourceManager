@@ -58,7 +58,7 @@ const AddReal = () => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         <div className="view"  id="add-real">
-          <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid container spacing={10} justify="center" alignItems="center">
             <Grid className={classes.root} item xs={12}>
               <SelectFood value={value} Change={handleChange}/>
             </Grid>

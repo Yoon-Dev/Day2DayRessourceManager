@@ -5,14 +5,17 @@
     position: absolute;
     display: flex;
     justify-content: space-evenly;
+    margin-top: 1em;
 }
 
 .btn-add{
     transition: background-color, color,  .3s ease !important;
+    box-shadow: 7px 7px 15px 2px #67676773, -7px -7px 15px 2px #ffffffe8;
 }
 
 .btn-off{
-    color: whitesmoke !important;
+    color: #67676773 !important;
+    background-color: transparent !important
 }
 
 .btn-active{

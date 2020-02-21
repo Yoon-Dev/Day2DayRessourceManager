@@ -86,7 +86,6 @@ const AddViews = () => {
         document.querySelector('#views').style.transform = "translateX("+destination+"px)";
         ref.current = target
         setCurrent(target)
-        console.log(ref.current)
 
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°

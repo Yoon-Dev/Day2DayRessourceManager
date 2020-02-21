@@ -1,9 +1,25 @@
 import React from "react";
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
 
 const SelectFood = props => {
 
+  const useStyles = makeStyles((theme) => createStyles({
+    bg: {
+        transition: "all .3s ease",
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+        boxShadow: "rgba(103, 103, 103, 0.45) 4px 4px 15px 2px, rgb(255, 255, 255) -4px -4px 15px 2px",
+        border: "1px solid transparent",
+        borderRadius: "10px",
+        width: "50%" ,
+        height: "5vh",
+          '&:focus': {
+          border: '3px solid #C2B548',
+          outline: "none"
+        }
+    },
+  }));
+  const bg = useStyles();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 // option values
     const values = [
@@ -32,21 +48,19 @@ const SelectFood = props => {
 // option default value 
     // const [value, setValue] = useState('EUR');
     return(
-        <TextField
+        <select
         id="select"
-        select
         label="Select"
         value={props.value}
         onChange={props.Change}
-        helperText="Please select your currency"
-        variant="outlined"
+        className={bg.bg}
       >
         {values.map(option => (
-          <MenuItem key={option.value} value={option.value}>
+          <option key={option.value} value={option.value}>
             {option.label}
-          </MenuItem>
+          </option>
         ))}
-      </TextField>
+      </select>
     )
 
 }

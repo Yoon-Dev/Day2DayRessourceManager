@@ -12,7 +12,7 @@ const BtnMap = props => {
 
     useEffect(
         () => {
-            console.log(props.target)
+
             const btn = document.querySelectorAll('.btn-add')
             btn.forEach((el,i) => {
                 if(props.target === i){
