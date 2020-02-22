@@ -13,13 +13,21 @@ const ExtensibleInput = props => {
             transition: "all .3s ease",
             backgroundColor: "rgba(255, 255, 255, 0.4)",
             boxShadow: "rgba(103, 103, 103, 0.45) 4px 4px 15px 2px, rgb(255, 255, 255) -4px -4px 15px 2px",
-            border: "1px solid transparent",
+            border: "3px solid transparent",
             borderRadius: "10px",
             width: "50%",
+            minHeight: "25px",
+            lineHeight: "25px",
+            '&::placeholder': {
+                textAlign: "center"
+              },
             '&:focus': {
             border: '3px solid #C2B548',
-            outline: "none"
-          }
+            outline: "none",
+          },
+          [theme.breakpoints.up('sm')]: {
+            width: "25%",
+          },
         },
       }));
       const bg = useStyles();
@@ -36,15 +44,15 @@ const ExtensibleInput = props => {
                 self.style.height = self.scrollHeight+'px'
                 
             }else{
-                // self.value = ''
-                // self.style.height = 'auto'
+                self.value = ''
+                self.style.height = '25px'
             }
 
     }, [props.value]);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
-        <TextareaAutosize className={bg.bg}id={props.id} label="Name" placeholder={props.placeholder}/>
+        <TextareaAutosize className={bg.bg} id={props.id} label="Name" placeholder={props.placeholder}/>
     )
 }
 

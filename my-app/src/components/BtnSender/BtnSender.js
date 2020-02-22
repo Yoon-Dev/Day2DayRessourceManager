@@ -1,28 +1,27 @@
-import React, { useEffect, useState }from "react";
-import Button from '@material-ui/core/Button';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState, useRef }from "react";
+import './BtnSender.css';
 
 const BtnSender = props => {
 
-    const [text, setText] = useState("Submit");
-    const useStyles = makeStyles((theme) => createStyles({
-        bg: {
-            backgroundColor: '#C2B548',
-            boxShadow: "7px 7px 15px 2px #67676773, -7px -7px 15px 2px #ffffffe8"
-        },
-      }));
-      const bgbtn = useStyles();
+    const [text, setText] = useState("Envoyer");
+    const id = useRef(`#${props.id}`)
+
     useEffect(() => {
+        const self  = document.querySelector(id.current)
         if(props.send === true){
-            setText("Envoyé")
-            setTimeout(() => {
-                setText("Submit")
+            setText("Ajouter !")
+            self.classList.add('btnsender-active', 'act-succes')
+            setTimeout(() => {  
+                setText("Envoyer")
+                self.classList.remove('btnsender-active', 'act-succes')
             }, 600);
         }
         else if(props.send === "error"){
-            setText("Empty")
+            setText("Vide")
+            self.classList.add('btnsender-active', 'act-error')
             setTimeout(() => {
-                setText("Submit")
+                setText("Envoyer")
+                self.classList.remove('btnsender-active', 'act-error')
             }, 600);
         }
     }, [props.send]);
@@ -30,9 +29,9 @@ const BtnSender = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
-        <Button variant="contained" className={bgbtn.bg} onClick={props.Click} >
-            {text}
-        </Button> 
+        <button className="btn-style" onClick={props.Click} id={props.id}>
+            <span>{text}</span>
+        </button> 
     )
 
 }

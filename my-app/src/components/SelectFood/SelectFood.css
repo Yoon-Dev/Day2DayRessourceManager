@@ -1,0 +1,24 @@
+.MuiInput-underline:before{
+    content: none !important;
+    border: none !important;
+
+}
+
+.MuiInput-underline:after{
+    content: none !important;
+    border: none !important;
+}
+
+.MuiInput-underline:focus{
+    outline: none !important; 
+}
+
+.MuiSelect-select:focus{
+    background-color: transparent !important;
+}
+
+.MuiMenu-paper{
+    box-shadow: rgba(103, 103, 103, 0.4) 7px 7px 15px 2px, rgb(255, 255, 255) -7px -7px 15px 2px !important;
+    border-radius: 15px !important;
+    background-color: rgba(244, 244, 244, 1) !important;
+}

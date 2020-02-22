@@ -66,7 +66,7 @@ const AddReal = () => {
               <ExtensibleInput value={value} id={dataid.current} placeholder="Liste de course"/>
             </Grid>
             <Grid className={classes.root} item xs={12}>
-              <BtnSender send={send} Click={throwData}/>
+              <BtnSender send={send} Click={throwData} id="realsend"/>
             </Grid>
           </Grid>
         </div>

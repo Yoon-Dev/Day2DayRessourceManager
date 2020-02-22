@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import "./SelectFood.css";
 
 const SelectFood = props => {
 
@@ -13,10 +15,15 @@ const SelectFood = props => {
         borderRadius: "10px",
         width: "50%" ,
         height: "5vh",
+        outline: "none",
+        textAlign: "center",
           '&:focus': {
           border: '3px solid #C2B548',
           outline: "none"
-        }
+        },
+        [theme.breakpoints.up('sm')]: {
+          width: "25%",
+        },
     },
   }));
   const bg = useStyles();
@@ -48,19 +55,20 @@ const SelectFood = props => {
 // option default value 
     // const [value, setValue] = useState('EUR');
     return(
-        <select
-        id="select"
-        label="Select"
+        <TextField
+        select
+        id="sf"
         value={props.value}
         onChange={props.Change}
         className={bg.bg}
+        helperText="Plat tout fait"
       >
         {values.map(option => (
-          <option key={option.value} value={option.value}>
+          <MenuItem key={option.value} value={option.value}>
             {option.label}
-          </option>
+          </MenuItem>
         ))}
-      </select>
+      </TextField>
     )
 
 }

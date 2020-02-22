@@ -21,4 +21,5 @@
 .btn-active{
     color: white !important;
     background-color: #757043 !important;
+    box-shadow: 4px 4px 15px 2px #67676773, -4px -4px 15px 2px #ffffffe8;
 }

@@ -1,0 +1,24 @@
+.input-text{
+    transition: all .3s ease;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: rgba(103, 103, 103, 0.45) 4px 4px 15px 2px, rgb(255, 255, 255) -4px -4px 15px 2px;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    width: 50%;
+    min-height: 25px;
+}
+
+@media (min-width:768px){
+    .input-text{
+        width: 25%;
+    }
+}
+
+.input-text:focus{
+        border: 3px solid #C2B548;
+        outline: none !important;
+}
+
+.input-text::placeholder{
+    text-align: center;
+}

@@ -3,14 +3,39 @@ html, body{
   min-height: 100vh;
 }
 
+p{
+  text-align: center !important;
+  margin-top: 10px !important;
+}
+
+p:focus{
+  border: none !important;
+  outline: none !important;
+}
+
 #App{
   background: #EEEEEE;
   
 }
+
 
 .appnavigation{
   z-index: 9999;
   position: absolute;
   bottom: 0;
   min-width: 100vw;
+}
+
+.act-succes{
+  background-color: #427AF5 !important;
+}
+
+.act-error{
+  background-color: #8F2753 !important;
+}
+
+@media (min-width:768px){
+  p{
+    margin-top: 30px !important;
+  }
 }

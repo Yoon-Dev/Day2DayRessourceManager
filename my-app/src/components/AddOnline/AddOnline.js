@@ -1,8 +1,8 @@
 import React, { useRef, useState }    from "react";
+import './AddOnline.css';
 // component
 import ExtensibleInput from "../ExtensibleInput/ExtensibleInput";
 import BtnSender from '../BtnSender/BtnSender';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -13,8 +13,9 @@ const AddOnline = () => {
   const useStyles = makeStyles((theme) => createStyles({
     root: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
+
   }));
   const classes = useStyles();
 
@@ -43,15 +44,15 @@ const throwData = () => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
       <div className="view" id="add-online">
-        <Grid container spacing={3} justify="center" alignItems="center">
+        <Grid container spacing={10} justify="center" alignItems="center">
           <Grid className={classes.root} item xs={12}>
-            <TextField id="standard-basic" label="nom" />
+            <input className="input-text" type="text" placeholder="nom"/>
           </Grid>
           <Grid className={classes.root} item xs={12}>
             <ExtensibleInput value="" id={dataid.current}  placeholder="url"/>
           </Grid>
           <Grid className={classes.root} item xs={12}>
-            <BtnSender send={send} Click={throwData}/>
+            <BtnSender send={send} Click={throwData} id="onlinesend"/>
           </Grid>   
         </Grid>
       </div>
