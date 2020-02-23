@@ -1,27 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Switch,
   Route,
-  Link,
   useRouteMatch
 } from "react-router-dom";
+import './List.css';
 // component
 import Real from '../Real/Real';
+import BtnMap from '../BtnMap/BtnMap';
 
 export default function List() {
   let match = useRouteMatch();
+
+  const [current, setCurrent] = useState(0);
   return (
-      <div>
-        <ul>
-          <li>
-            <Link to={`${match.url}`}>Real</Link>
-          </li>
-          <li>
-            <Link to={`${match.path}/wishlist`}>
-              Online
-            </Link>
-          </li>
-        </ul>
+    <div>
+      <div id="list">
         <Real/>
         <Switch>
           <Route path={`${match.path}/wishlist`}>
@@ -29,5 +23,7 @@ export default function List() {
           </Route>
         </Switch>
       </div>
+      <BtnMap click={() => {console.log("click")}} fcttarget={() => {console.log("fcttarget")}} target={current}  urlft="" urlsc="/wishlist"/>
+    </div>
     );
 }

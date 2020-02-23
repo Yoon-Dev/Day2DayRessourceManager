@@ -10,7 +10,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import './App.css';
 // Component
-import Add from '../Add/Add';
+import AddViews from '../AddViews/AddViews';
 import List from '../List/List';
 
 
@@ -72,7 +72,7 @@ export default class App extends Component {
               <List />
             </Route>
             <Route path="/">
-              <Add />
+              <AddViews />
             </Route>
           </Switch>
         </Router>

@@ -104,7 +104,7 @@ const AddViews = () => {
                 <AddReal/>
                 <AddOnline/>
             </div>
-            <BtnMap click={nav} fcttarget={fcttarget} target={current}/>
+            <BtnMap click={nav} fcttarget={fcttarget} target={current} urlft="" urlsc=""/>
         </div>
 
     );
