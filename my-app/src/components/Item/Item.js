@@ -46,7 +46,16 @@ const Item = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // send a request to delete the ressouce in BDD
     const delItemBack = (id) => {
-        console.log(id)
+        fetch("http://apires.localhost/src/Del.php?id="+id)
+            .then( res => {
+                return res.json()
+            })
+            .then( res => {
+                console.log(res[0])
+            })
+            .catch(error => {
+                alert(error)
+            })
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
