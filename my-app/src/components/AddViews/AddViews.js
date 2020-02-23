@@ -19,7 +19,7 @@ const AddViews = () => {
     useEffect( () => {
         
         const views = document.querySelectorAll('.view')
-        const app = document.querySelector('#App')
+        const app = document.querySelector('#views')
 
         views.forEach((el, i) => {
             let x = (window.innerWidth * (i))
@@ -75,7 +75,7 @@ const AddViews = () => {
             }
           })
 
-    });
+    }, []);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // do the navigation with btn
@@ -104,7 +104,7 @@ const AddViews = () => {
                 <AddReal/>
                 <AddOnline/>
             </div>
-            <BtnMap click={nav} fcttarget={fcttarget} target={current} urlft="" urlsc=""/>
+            <BtnMap click={nav} fcttarget={fcttarget} target={current}/>
         </div>
 
     );

@@ -4,10 +4,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 // component
 
 const ExtensibleInput = props => {
-    //     border: none;
-    // border-radius: 10px;
-    // box-shadow: rgba(103, 103, 103, 0.45) 4px 4px 15px 2px, rgb(255, 255, 255) -4px -4px 15px 2px;
-    // background-color: rgba(255, 255, 255, 0.61);
+
     const useStyles = makeStyles((theme) => createStyles({
         bg: {
             transition: "all .3s ease",

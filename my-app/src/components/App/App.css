@@ -1,5 +1,5 @@
 html, body{
-  overflow: hidden;
+  overflow: hidden auto;
   min-height: 100vh;
 }
 
@@ -19,7 +19,6 @@ p:focus{
 
 #App{
   background: #EEEEEE;
-  
 }
 
 
@@ -30,11 +29,12 @@ p:focus{
   align-items: center;
   position: absolute;
   min-width: 100vw;
+  background: #EEEEEE;
 }
 
 .appnavigation{
   z-index: 9999;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   min-width: 100vw;
 }

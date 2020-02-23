@@ -5,14 +5,13 @@ import {
     Link,
     useRouteMatch
   } from "react-router-dom";
+
 const BtnMap = props => {
     let match = useRouteMatch();
     // const target = useRef(props.target)
     const fct = useRef(props.click)
     const fcttarget = useRef(props.fcttarget)
     
-
-
     useEffect(
         () => {
 
@@ -38,5 +37,10 @@ const BtnMap = props => {
         </div>
     );
 }
+
+BtnMap.defaultProps = {
+    urlft: "",
+    urlsc: ""
+  }
 
 export default BtnMap

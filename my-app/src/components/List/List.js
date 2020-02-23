@@ -23,7 +23,7 @@ export default function List() {
           </Route>
         </Switch>
       </div>
-      <BtnMap click={() => {console.log("click")}} fcttarget={() => {console.log("fcttarget")}} target={current}  urlft="" urlsc="/wishlist"/>
+      <BtnMap click={() => {console.log("click")}} fcttarget={() => {console.log("fcttarget")}} target={current} urlsc="/wishlist"/>
     </div>
     );
 }

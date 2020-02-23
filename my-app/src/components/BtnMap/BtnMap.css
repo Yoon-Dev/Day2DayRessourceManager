@@ -2,10 +2,14 @@
     z-index: 999;
     top: 0;
     min-width: 100vw;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-evenly;
     margin-top: 1em;
+}
+
+#btns a{
+    text-decoration: none;
 }
 
 .btn-add{
