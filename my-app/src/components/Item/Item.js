@@ -9,15 +9,18 @@ const Item = props => {
     const delay = useRef(300)
     const useStyles = makeStyles( () => createStyles({
         m: {
-            marginTop: "3vh",
+            marginTop: "5vh",
             transition: "all ."+delay.current+"s ease"
         },
         rm: {
             opacity: 0,
-            height: 0
+            height: 0,
+            transform: "translateX(100px)",
+            fontStyle: "italic"
         },
         el: {
-            transition: "all ."+delay.current+"s ease"
+            transition: "all ."+delay.current+"s ease",
+            fontSize: "1.8em"
         }
       }));
     const style = useStyles();
@@ -51,7 +54,9 @@ const Item = props => {
                 return res.json()
             })
             .then( res => {
-                console.log(res[0])
+                if(res[0] !== "succes"){
+                    alert("error when deleting")
+                }
             })
             .catch(error => {
                 alert(error)

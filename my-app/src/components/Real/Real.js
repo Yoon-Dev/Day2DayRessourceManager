@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import './Real.css';
 // component
 import Item from '../Item/Item';
 const Real = props => {
@@ -47,17 +48,17 @@ const Real = props => {
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°   
     let url = useLocation() 
-    if(url.pathname === "/list/wishlist") {
+    if(url.pathname === "/list/wishlist/yes" || url.pathname === "/list/wishlist/no") {
         return null
     }else{
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
         return(
-            <div className="view"  id="add-real">
+            <div className="view"  id="real">
                 <Grid container justify="center" alignItems="center">
                     <Grid item xs={12} className={style.m}> 
                         <ul>
-                            <Grid container className={style.p} justify="center" alignItems="center">
+                            <Grid container className={style.p} justify="center" alignItems="flex-start">
                                 { on ? items : "loading" } 
                             </Grid>
                         </ul>

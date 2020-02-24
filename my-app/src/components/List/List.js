@@ -7,10 +7,12 @@ import {
 import './List.css';
 // component
 import Real from '../Real/Real';
+import Online from '../Online/Online';
 import BtnMap from '../BtnMap/BtnMap';
 
 export default function List() {
   let match = useRouteMatch();
+
 
   const [current, setCurrent] = useState(0);
   return (
@@ -18,12 +20,12 @@ export default function List() {
       <div id="list">
         <Real/>
         <Switch>
-          <Route path={`${match.path}/wishlist`}>
-            <h3>Online</h3>
+          <Route path={`${match.path}/wishlist/:lock`}>
+            <Online/>
           </Route>
         </Switch>
       </div>
-      <BtnMap click={() => {console.log("click")}} fcttarget={() => {console.log("fcttarget")}} target={current} urlsc="/wishlist"/>
+      <BtnMap click={() => {console.log("click")}} fcttarget={() => {console.log("fcttarget")}} target={current} urlsc="/wishlist/yes" lock="/list/wishlist/no"/>
     </div>
     );
 }
