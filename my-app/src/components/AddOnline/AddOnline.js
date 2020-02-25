@@ -8,7 +8,8 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const AddOnline = () => {
 
-  const dataid = useRef("onlineextin")
+  const urlid = useRef("onlineextin")
+  const nomid = useRef("nomonline")
   const [send, setSend] = useState(false);
   const useStyles = makeStyles((theme) => createStyles({
     root: {
@@ -24,11 +25,13 @@ const AddOnline = () => {
 // throw data on the end point Online/Add.php
 const throwData = () => {
 
-  let data = document.querySelector(`#${dataid.current}`).value
-  if(data){
-    fetch('http://apires.localhost/src/RealAdd.php?nom='+data).then(() =>{
+  let url = document.querySelector(`#${urlid.current}`).value
+  let nom = document.querySelector(`#${nomid.current}`).value
+if(url && nom){
+    fetch(`http://apires.localhost/src/OnlineAdd.php?nom=${nom}&url=${url}`).then(() =>{
     setSend(true)
-    document.querySelector(`#${dataid.current}`).value = ''
+    document.querySelector(`#${urlid.current}`).value = ""
+    document.querySelector(`#${nomid.current}`).value = ""
     })
   }else{
     setSend('error')
@@ -46,10 +49,10 @@ const throwData = () => {
       <div className="view" id="add-online">
         <Grid container spacing={10} justify="center" alignItems="center">
           <Grid className={classes.root} item xs={12}>
-            <input className="input-text" type="text" placeholder="nom"/>
+            <input className="input-text" id={nomid.current} type="text" placeholder="nom"/>
           </Grid>
           <Grid className={classes.root} item xs={12}>
-            <ExtensibleInput value="" id={dataid.current}  placeholder="url"/>
+            <ExtensibleInput value="" id={urlid.current}  placeholder="url"/>
           </Grid>
           <Grid className={classes.root} item xs={12}>
             <BtnSender send={send} Click={throwData} id="onlinesend"/>

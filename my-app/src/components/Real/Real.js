@@ -23,7 +23,7 @@ const Real = props => {
         fetch("http://apires.localhost/src/RealSelect.php")
             .then( res => {
                 return res.json()
-            })
+            }) 
             .then( res => {
                 const data = res
                 setOn(true)

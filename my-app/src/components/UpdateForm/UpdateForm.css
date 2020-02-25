@@ -1,0 +1,7 @@
+.update-form-out{
+    transform: scale(0);
+}
+
+.update-form-in{
+    transform: scale(1);
+}

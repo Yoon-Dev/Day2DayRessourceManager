@@ -11,7 +11,6 @@ import Online from '../Online/Online';
 
 export default function List() {
   let match = useRouteMatch();
-  console.log(`${match.path}/wishlist`)
 
   // const [current, setCurrent] = useState(0);
   return (
