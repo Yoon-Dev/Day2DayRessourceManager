@@ -4,20 +4,23 @@ import './AddViews.css';
 // component
 import AddReal from '../AddReal/AddReal';
 import AddOnline from '../AddOnline/AddOnline';
+import Real from '../Real/Real';
+import Online from '../Online/Online';
 import BtnMap from '../BtnMap/BtnMap';
 
-const AddViews = () => {
-
+const AddViews = props => {
 
     const [current, setCurrent] = useState(0);
-    // const [tabView, setTabView] = useState({0: "#add-real", 1: "#add-online"});
+    const Dynamic = [AddReal, AddOnline, Real, Online]
+    const [firstComponent] = useState(React.createElement(Dynamic[props.comp1], null, null));
+    const [secondComponent] = useState(React.createElement(Dynamic[props.comp2], null, null));
     const ref = useRef(current);
     const nbr_views = useRef(2)
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // display the view and add hammer js event
     useEffect( () => {
-        
+
         const views = document.querySelectorAll('.view')
         const app = document.querySelector('#views')
 
@@ -101,10 +104,10 @@ const AddViews = () => {
     return(
         <div>
             <div id="views">
-                <AddReal/>
-                <AddOnline/>
+            { firstComponent }
+            { secondComponent }
             </div>
-            <BtnMap click={nav} fcttarget={fcttarget} target={current}/>
+            <BtnMap click={nav} fcttarget={fcttarget} target={current} lock="/list/wishlist"/>
         </div>
 
     );

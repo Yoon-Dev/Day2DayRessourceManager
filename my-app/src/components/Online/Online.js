@@ -1,13 +1,16 @@
 import React from "react";
-import {
-  useParams
-} from "react-router-dom";
 import './Online.css';
+import Grid from '@material-ui/core/Grid';
+
 
 const Online = props => {
-    let { lock } = useParams();
+
     return(
-        <h2>Online { lock }</h2>
+        <div className="view"  id="real">
+          <Grid container justify="center" alignItems="center">
+             <h1>Online</h1>
+          </Grid>
+        </div>
     )
 }
 
