@@ -37,18 +37,28 @@ const UpdateForm = props => {
 
     const [send, setSend] = useState(false);
     const [livraison, setLivraison] = useState(props.data.livraison);
+
+
     useEffect(() => {
-        const self = document.getElementsByClassName(props.data.id)[0]
+        const self = document.querySelector(`#form${props.data.id}`)
         self.classList.remove("update-form-out")
         self.classList.add("update-form-in")
     }, [props.data.id]);
+
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // remove the component
     const remove = () => {
-        const self = document.getElementsByClassName(props.data.id)[0]
+        const self = document.querySelector(`#form${props.data.id}`)
         self.classList.remove("update-form-in")
         self.classList.add("update-form-out")
+        focusOut()
+        props.changeUrl(getInputValue("url"))
+        props.changeUrl_suivi(getInputValue("url_suivi"))
+        props.changeNumero_suivi(getInputValue("numero_suivi"))
+        // setUrl(getInputValue("url"))
+        // setUrl_suivi(getInputValue("url_suivi"))
+        // setNumero_suivi(getInputValue("numero_suivi"))
         setTimeout(() => {
             props.rm()
         }, delay.current);
@@ -115,30 +125,36 @@ const UpdateForm = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // get current value
-    const focusOut = (type, id) => {
+    const focusOut = () => {
         // test if old is different from new
-        if(ref.current.get(type) !== getInputValue(type)){
-            // update DataBase
-            fetch(`http://apires.localhost/src/OnlineUpdateSolo.php?type=${type}&value=${getInputValue(type)}&id=${id}`)
-            .then( res => {
-                return res.json()
-            })
-            .then( res => {
-                if(res[0] !== "succes"){
-                    alert("error when updating")
+        const inputs = document.querySelectorAll('.form-input')
+        inputs.forEach(el => {
+            let typeinput = el.getAttribute('id')
+            if(ref.current.get(typeinput) !== getInputValue(typeinput)){
+                // send BDD request
+                let idbis = el.closest(`#form${props.data.id}`).getAttribute('data-bdd')
+                // typeinput && id send request
+                fetch(`http://apires.localhost/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
+                .then( res => {
+                    return res.json()
+                })
+                .then( res => {
+                    if(res[0] !== "succes"){
+                        alert("error when updating")
+                    }
+                })
+                .catch(error => {
+                    alert(error)
+                })
                 }
-            })
-            .catch(error => {
-                alert(error)
-            })
-        }
+        })
 
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         
-            <div className={`${props.data.id} ${style.el}`}>
+            <div id={`form${props.data.id}`} className={`${style.el}`} data-bdd={props.data.id}>
                 <Grid container justify="center" alignItems="center">
                     <Grid className={style.center} item xs={12}>
                         <IconButton aria-label="clear-form" onClick={remove}>
@@ -146,13 +162,13 @@ const UpdateForm = props => {
                         </IconButton>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" onChange={() => {props.changeUrl(getInputValue("url"))}} name="url" defaultValue={props.url} onBlur={() => {focusOut("url", props.data.id)}} id="url"/>
+                        <input type="text" className="form-input"  name="url" defaultValue={props.url} id="url"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" onChange={() => {props.changeUrl_suivi(getInputValue("url_suivi"))}} name="url_suivi" defaultValue={props.url_suivi ? props.data.url_suivi  : ""} id="url_suivi"/>
+                        <input type="text" className="form-input"  name="url_suivi" defaultValue={props.url_suivi ? props.url_suivi  : ""} id="url_suivi"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" onChange={() => {props.changeNumero_suivi(getInputValue("numero_suivi"))}} name="numero_suivi" defaultValue={props.numero_suivi ? props.data.numero_suivi : ""} id="numero_suivi"/>
+                        <input type="text" className="form-input"  name="numero_suivi" defaultValue={props.numero_suivi ? props.numero_suivi : ""} id="numero_suivi"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
                         { livraison ? <BtnSender send={send} Click={() => {Livraison(props.data.id)}} id="updateformsend" text="Annulé la livraison" error="error" succes="Validé"  bg="act-error"/> : <BtnSender send={send} Click={() => {Livraison(props.data.id)}} id="updateformsend" text="Colis acheté" error="error" succes="Validé"/> }          
@@ -162,5 +178,10 @@ const UpdateForm = props => {
 
     )
 }
-
+// onChange={() => {props.changeUrl(getInputValue("url"))}}
+// onChange={() => {props.changeUrl_suivi(getInputValue("url_suivi"))}}
+// onChange={() => {props.changeNumero_suivi(getInputValue("numero_suivi"))}}
+// onBlur={() => {focusOut("url", props.data.id, false)}}
+// onBlur={() => {focusOut("url_suivi", props.data.id, false)}}
+// onBlur={() => {focusOut("numero_suivi", props.data.id, false)}}
 export default UpdateForm;
