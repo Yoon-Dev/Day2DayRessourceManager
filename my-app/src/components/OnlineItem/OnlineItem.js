@@ -8,7 +8,6 @@ import UpdateForm from "../UpdateForm/UpdateForm";
 
 const OnlineItem = props => {
 
-
         const useStyles = makeStyles( () => createStyles({
           center: {
               display: "flex",
@@ -17,58 +16,58 @@ const OnlineItem = props => {
         }));
         const style = useStyles();
         const [form, setForm] = useState(null);
+        const [url, setUrl] = useState(props.url);
+        const [url_suivi, setUrl_suivi] = useState(props.url_suivi);
+        const [numero_suivi, setNumero_suivi] = useState(props.numero_suivi);
+        const [livraison, setLivraison] = useState(props.livraison);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // set hammerjs event 
-useEffect(() => {
-    const self = document.getElementById(props.id)
-    const hammer = new Hammer(self)
+    useEffect( () => {
+        const self = document.getElementById(props.id)
+        const hammer = new Hammer(self)
 
-    hammer.on('press', e => {
-        console.log(props)
-        setForm(createUpdateForm(props))
-    })
-
-    return () => {
-        console.log("Unmount")
-    };
-    });
+        hammer.on('press', e => {
+            const form = 
+                <UpdateForm key={props.id}
+                    data={props}
+                    url={url}
+                    url_suivi={url_suivi}
+                    numero_suivi={numero_suivi}
+                    changeUrl={setUrl}
+                    changeUrl_suivi={setUrl_suivi}
+                    changeNumero_suivi={setNumero_suivi}
+                    udLivraison={setLivraison}
+                    rm={rmForm}
+                >
+                </UpdateForm>  
+        setForm(form) 
+        })
+    }, [props, url, url_suivi, numero_suivi]);
 
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // send a request to delete the ressouce in BDD
-    const delItemBack = id => {
-        fetch(`http://apires.localhost/src/Del.php?id=${id}`)
-            .then( res => {
-                return res.json()
-            })
-            .then( res => {
-                if(res[0] !== "succes"){
-                    alert("error when deleting")
-                }
-            })
-            .catch(error => {
-                alert(error)
-            })
-    }
+    // const delItemBack = id => {
+    //     fetch(`http://apires.localhost/src/Del.php?id=${id}`)
+    //         .then( res => {
+    //             return res.json()
+    //         })
+    //         .then( res => {
+    //             if(res[0] !== "succes"){
+    //                 alert("error when deleting")
+    //             }
+    //         })
+    //         .catch(error => {
+    //             alert(error)
+    //         })
+    // }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // unmount the UpdateForm Component
     const rmForm = () => {
         setForm(null)
     }
-// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
-// create UpdateForm component
-    const createUpdateForm = data => {
-        const form = 
-            <UpdateForm key={data.id}
-                data={data}
-                rm={rmForm}
-            >
-            </UpdateForm>  
-        return form;
-      }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
     return(
@@ -80,9 +79,9 @@ useEffect(() => {
                     <h4>{props.nom}</h4>
                 </Grid>
                 <Grid className={style.center} item xs={12}>
-                    <a href={props.url}>Voir</a> 
+                    <a href={url}>Voir</a> 
                 </Grid>
-                { props.livraison ? <h1>Oui</h1> : <h1>Non</h1> }
+                { livraison ? <h1>Oui</h1> : <h1>Non</h1> }
             </Grid>
 
         </div>
