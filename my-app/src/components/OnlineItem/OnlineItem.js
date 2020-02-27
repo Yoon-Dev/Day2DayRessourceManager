@@ -14,6 +14,9 @@ const OnlineItem = props => {
           center: {
               display: "flex",
               justifyContent: "center"
+          },
+          mb: {
+            marginBottom: "1.33em"
           }
         }));
         const style = useStyles();
@@ -21,6 +24,7 @@ const OnlineItem = props => {
          * State variable
          */
         const [form, setForm] = useState(null);
+        const [data] = useState(props);
         const [url, setUrl] = useState(props.url);
         const [url_suivi, setUrl_suivi] = useState(props.url_suivi);
         const [numero_suivi, setNumero_suivi] = useState(props.numero_suivi);
@@ -31,6 +35,7 @@ const OnlineItem = props => {
         const urlRef = useRef(url)
         const url_suiviRef = useRef(url_suivi)
         const numero_suiviRef = useRef(numero_suivi)
+        const livraisonRef = useRef(livraison)
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // set hammerjs event 
@@ -40,7 +45,8 @@ const OnlineItem = props => {
         hammer.on('press', e => {
             const form = 
                 <UpdateForm key={props.id}
-                    data={props}
+                    data={data}
+                    livraison={livraisonRef.current}
                     url={urlRef.current}
                     url_suivi={url_suiviRef.current}
                     numero_suivi={numero_suiviRef.current}
@@ -53,8 +59,14 @@ const OnlineItem = props => {
                 </UpdateForm>  
         setForm(form) 
         })
-    }, [props, url, url_suivi, numero_suivi, form]);
+    }, [data, props.id, url, url_suivi, numero_suivi, form]);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    /**
+	 * Updating state varialbe for useEffect
+     */
+    useEffect(() => {
+        livraisonRef.current = livraison
+    }, [livraison]);
     /**
 	 * Updating state varialbe for useEffect
      */
@@ -99,39 +111,38 @@ const OnlineItem = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
     return(
-    <Grid id={props.id} item xs={12}>
-        { form ? form : null }
+    <Grid id={props.id} item xs={9}>
         <div className="online-card">
             <Grid container justify="center" alignItems="center">
                 <Grid className={style.center} item xs={12}>
                     <h4>{props.nom}</h4>
                 </Grid>
-                <Grid className={style.center} item xs={12}>
+                <Grid className={livraisonRef.current ? style.center : `${style.center} ${style.mb}`} item xs={12}>
                     <a href={url}>Voir</a> 
                 </Grid>
-                { livraison && props.url_suivi ?
-                <div>
+                { form ? form : null }        
+                { livraisonRef.current && url_suiviRef.current ?
+                <Grid container justify="center" alignItems="center" spacing={1}>
                     <Grid className={style.center} item xs={12}>
-                        <h3>##Livraison en cour depuis {props.nbr_jour} jour</h3> 
+                        <p>Livraison en cour depuis <b>{props.nbr_jour}</b> jour</p>  
                     </Grid>
-                    <Grid className={style.center} item xs={6}>
-                        <h3>{ url_suivi }</h3> 
+                    <Grid className={style.center} item xs={4}>
+                        <h5><a href={url_suivi}>Suivi de Colis</a></h5> 
                     </Grid>
-                    <Grid className={style.center} item xs={6}>
-                <h3>{ numero_suivi }</h3> 
+                    <Grid className={style.center} item xs={4}>
+                        <h5>{ numero_suivi }</h5> 
                     </Grid>              
-                </div>
+                </Grid>
 
                     
-                : livraison ?
+                : livraisonRef.current ?
                 <Grid className={style.center} item xs={12}>
-                    <h3>Livraison en cour depuis {props.nbr_jour} jour</h3> 
+                    <p>Livraison en cour depuis <b>{props.nbr_jour}</b> jour</p> 
                 </Grid>
                     : null
                 }
                  
             </Grid>
-
         </div>
     </Grid>
     )

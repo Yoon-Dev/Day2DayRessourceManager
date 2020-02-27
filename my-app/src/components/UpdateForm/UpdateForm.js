@@ -16,18 +16,31 @@ const UpdateForm = props => {
             fontSize: "1.8em",
             position: "absolute",
             zIndex: "9999",
-            minHeight: "100vh",
+            minHeight: "40vh",
             minWidth: "100vw",
-            backgroundColor: "aquamarine",
+            backgroundColor: "#EEE",
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-start",
-            top: "0",
+            left: "0",
+            transform: "scale(0)"
         },
         positionitem: {
             display: "flex",
             justifyContent: "center"
         },
+        endposition: {
+            display: "flex",
+            justifyContent: "flex-end",
+            
+        },
+        container: {
+            height: "40vh",
+            alignItems: "flex-start"
+        },
+        bs: {
+            boxShadow: "rgba(103, 103, 103, 0.45) 4px 4px 15px 2px, rgb(255, 255, 255) -4px -4px 15px 2px"
+        }
       }));
     const style = useStyles();
     
@@ -36,13 +49,17 @@ const UpdateForm = props => {
     const ref = useRef(map.set('url', props.url).set('url_suivi', props.url_suivi).set('numero_suivi', props.numero_suivi))
 
     const [send, setSend] = useState(false);
-    const [livraison, setLivraison] = useState(props.data.livraison);
-
+    const [livraison, setLivraison] = useState(props.livraison);
 
     useEffect(() => {
+        
         const self = document.querySelector(`#form${props.data.id}`)
-        self.classList.remove("update-form-out")
+        console.log(self.classList)
+        // self.classList.remove("update-form-out")
         self.classList.add("update-form-in")
+        return () => {
+            console.log("return")
+        };
     }, [props.data.id]);
 
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -51,7 +68,7 @@ const UpdateForm = props => {
     const remove = () => {
         const self = document.querySelector(`#form${props.data.id}`)
         self.classList.remove("update-form-in")
-        self.classList.add("update-form-out")
+        // self.classList.add("update-form-out")
         focusOut()
         props.changeUrl(getInputValue("url"))
         props.changeUrl_suivi(getInputValue("url_suivi"))
@@ -65,54 +82,63 @@ const UpdateForm = props => {
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// confirm livraison
+    const confirmLivraison = id => {
+        let r = window.confirm("Voulez vous vraiment annulé la livraison ??? :(");
+        if (r === true) {
+            Livraison(id)
+        }
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // toggle confir the livraison
     const Livraison = id => {
         // livraison est null
-        if(!livraison){
-            // frontend update
-            setSend(true)
-            // parent ud component 
-            props.udLivraison(1)
-            // local state update
-            setLivraison(1)
-            // backend update
-            fetch(`http://apires.localhost/src/OnlineLivraison.php?type=add&id=${id}`)
-            .then( res => {
-                return res.json()
-            })
-            .then( res => {
-                if(res[0] !== "succes"){
-                    alert("error when updating")
-                }
-            })
-            .catch(error => {
-                alert(error)
-            })
-        // livraison est activé
-        }else{
-            // frontend update
-            setSend(true)
-            // parent ud component
-            props.udLivraison(null)
-            // local state update
-            setLivraison(null)
-            // backend update
-            fetch(`http://apires.localhost/src/OnlineLivraison.php?type=remove&id=${id}`)
-            .then( res => {
-                return res.json()
-            })
-            .then( res => {
-                if(res[0] !== "succes"){
-                    alert("error when updating")
-                }
-            })
-            .catch(error => {
-                alert(error)
-            })
-        }
-        setTimeout(() => {
-            setSend(false) 
-          }, 200);
+            if(!livraison){
+                // frontend update
+                setSend(true)
+                // parent ud component 
+                props.udLivraison(1)
+                // local state update
+                setLivraison(1)
+                // backend update
+                fetch(`http://apires.localhost/src/OnlineLivraison.php?type=add&id=${id}`)
+                .then( res => {
+                    return res.json()
+                })
+                .then( res => {
+                    if(res[0] !== "succes"){
+                        alert("error when updating")
+                    }
+                })
+                .catch(error => {
+                    alert(error)
+                })
+            // livraison est activé
+            }else{
+                // frontend update
+                setSend(true)
+                // parent ud component
+                props.udLivraison(null)
+                // local state update
+                setLivraison(null)
+                // backend update
+                fetch(`http://apires.localhost/src/OnlineLivraison.php?type=remove&id=${id}`)
+                .then( res => {
+                    return res.json()
+                })
+                .then( res => {
+                    if(res[0] !== "succes"){
+                        alert("error when updating")
+                    }
+                })
+                .catch(error => {
+                    alert(error)
+                })
+            }
+            setTimeout(() => {
+                setSend(false) 
+            }, 200);
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -154,24 +180,24 @@ const UpdateForm = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         
-            <div id={`form${props.data.id}`} className={`${style.el}`} data-bdd={props.data.id}>
-                <Grid container justify="center" alignItems="center">
-                    <Grid className={style.center} item xs={12}>
-                        <IconButton aria-label="clear-form" onClick={remove}>
+            <div id={`form${props.data.id}`} className={`${style.el} online-card`} data-bdd={props.data.id}>
+                <Grid container justify="center" alignItems="center" className={style.container}>
+                    <Grid className={style.endposition} item xs={12}>
+                        <IconButton aria-label="clear-form" onClick={remove} className={style.bs}>
                             <ClearIcon/>
                         </IconButton>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" className="form-input"  name="url" defaultValue={props.url} id="url"/>
+                        <input type="text" className="form-input"  name="url" defaultValue={props.url} id="url" placeholder="url de l'article"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" className="form-input"  name="url_suivi" defaultValue={props.url_suivi ? props.url_suivi  : ""} id="url_suivi"/>
+                        <input type="text" className="form-input"  name="url_suivi" defaultValue={props.url_suivi ? props.url_suivi  : ""} id="url_suivi" placeholder="url du suivi de colis"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        <input type="text" className="form-input"  name="numero_suivi" defaultValue={props.numero_suivi ? props.numero_suivi : ""} id="numero_suivi"/>
+                        <input type="text" className="form-input"  name="numero_suivi" defaultValue={props.numero_suivi ? props.numero_suivi : ""} id="numero_suivi" placeholder="numero de suivi"/>
                     </Grid>
                     <Grid className={style.positionitem} item xs={12}>
-                        { livraison ? <BtnSender send={send} Click={() => {Livraison(props.data.id)}} id="updateformsend" text="Annulé la livraison" error="error" succes="Validé"  bg="act-error"/> : <BtnSender send={send} Click={() => {Livraison(props.data.id)}} id="updateformsend" text="Colis acheté" error="error" succes="Validé"/> }          
+                        { livraison ? <BtnSender send={send} Click={() => {confirmLivraison(props.data.id)}} id="updateformsend" text="Annulé la livraison" error="error" succes="Validé"  bg="act-error"/> : <BtnSender send={send} Click={() => {Livraison(props.data.id)}} id="updateformsend" text="Colis acheté" error="error" succes="Validé"/> }          
                     </Grid>
                 </Grid>
             </div>

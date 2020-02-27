@@ -61,7 +61,7 @@ const createOnlineItems = data => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         <div id="online" className={`${style.m} view`}>
-          <Grid container justify="center" alignItems="center">
+          <Grid container justify="center" alignItems="center" spacing={6}>
             { on ? items : "loading" } 
           </Grid>
         </div>
