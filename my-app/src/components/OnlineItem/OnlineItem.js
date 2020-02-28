@@ -31,7 +31,6 @@ const OnlineItem = props => {
         const [url, setUrl] = useState(props.url);
         const [url_suivi, setUrl_suivi] = useState(props.url_suivi);
         const [numero_suivi, setNumero_suivi] = useState(props.numero_suivi);
-        const [nbr_jour, setNbr_jour] = useState(props.nbr_jour);
         const [livraison, setLivraison] = useState(props.livraison);
         /**
          * Ref varaible for the useEffect (don't put state variable in asynch variable in useEffect)
@@ -47,7 +46,7 @@ const OnlineItem = props => {
         const self = document.getElementById(props.id)
         const hammer = new Hammer(self)
         hammer.on('press', e => {
-            const form = 
+            const formComponent = 
                 <UpdateForm key={props.id}
                     data={data}
                     livraison={livraisonRef.current}
@@ -61,7 +60,7 @@ const OnlineItem = props => {
                     rm={rmForm}
                 >
                 </UpdateForm>  
-        setForm(form) 
+        setForm(formComponent) 
         })
         hammer.on('tap', e => {
 

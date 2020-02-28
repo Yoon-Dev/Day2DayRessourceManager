@@ -48,7 +48,7 @@ const UpdateForm = props => {
     const ref = useRef(map.set('url', props.url).set('url_suivi', props.url_suivi).set('numero_suivi', props.numero_suivi))
 
     const [send, setSend] = useState(false);
-    const [livraison, setLivraison] = useState(props.livraison);
+    const [livraison] = useState(props.livraison);
 
     useEffect(() => {
         
@@ -101,12 +101,10 @@ const UpdateForm = props => {
     const Livraison = id => {
         // livraison est null
             if(!livraison){
-                // frontend update
-                setSend(true)
+
                 // parent ud component 
                 props.udLivraison(1)
-                // local state update
-                setLivraison(1)
+
                 // backend update
                 fetch(`http://apires.localhost/src/OnlineLivraison.php?type=add&id=${id}`)
                 .then( res => {
@@ -116,18 +114,16 @@ const UpdateForm = props => {
                     if(res[0] !== "succes"){
                         alert("error when updating")
                     }
+                    remove()
+
                 })
                 .catch(error => {
                     alert(error)
                 })
             // livraison est activé
             }else{
-                // frontend update
-                setSend(true)
                 // parent ud component
                 props.udLivraison(null)
-                // local state update
-                setLivraison(null)
                 // backend update
                 fetch(`http://apires.localhost/src/OnlineLivraison.php?type=remove&id=${id}`)
                 .then( res => {
@@ -137,6 +133,7 @@ const UpdateForm = props => {
                     if(res[0] !== "succes"){
                         alert("error when updating")
                     }
+                    remove()
                 })
                 .catch(error => {
                     alert(error)

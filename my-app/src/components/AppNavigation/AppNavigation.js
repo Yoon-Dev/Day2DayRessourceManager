@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AppNavigation.css'
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -21,9 +21,13 @@ const AppNavigation = props => {
       }));
     const style = useStyles();
 
+    useEffect(() => {
+      const self = document.querySelector('#navbar')
+      self.style.height = `${self.offsetHeight}px`
+    });
     let url = useLocation() 
     return(
-        <div className={props.lock === url.pathname ? style.lock+" appnavigation" : "appnavigation"}>
+        <div className={props.lock === url.pathname ? style.lock+" appnavigation" : "appnavigation"} id="navbar">
             <BottomNavigation className={style.bg}>
               <BottomNavigationAction  component={Link}to="/" icon={<AddIcon fontSize={"large"}/>} />
               <BottomNavigationAction component={Link} to="/list" icon={<ListIcon fontSize={"large"}/>} />

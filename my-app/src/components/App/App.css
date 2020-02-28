@@ -22,6 +22,11 @@ p:focus{
   background: #EEEEEE;
 }
 
+.hide{
+  opacity: 0;
+  transform: skewX(10deg) translateY(10px) scaleY(.5);
+  height: 0px;
+}
 
 .view{
   z-index: 99;
