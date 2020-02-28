@@ -17,6 +17,9 @@ const OnlineItem = props => {
           },
           mb: {
             marginBottom: "1.33em"
+          },
+          del: {
+              backgroundColor: "red"
           }
         }));
         const style = useStyles();
@@ -28,6 +31,7 @@ const OnlineItem = props => {
         const [url, setUrl] = useState(props.url);
         const [url_suivi, setUrl_suivi] = useState(props.url_suivi);
         const [numero_suivi, setNumero_suivi] = useState(props.numero_suivi);
+        const [nbr_jour, setNbr_jour] = useState(props.nbr_jour);
         const [livraison, setLivraison] = useState(props.livraison);
         /**
          * Ref varaible for the useEffect (don't put state variable in asynch variable in useEffect)
@@ -59,6 +63,19 @@ const OnlineItem = props => {
                 </UpdateForm>  
         setForm(form) 
         })
+        hammer.on('tap', e => {
+
+            if(e.tapCount === 3){
+
+                self.firstChild.classList.add("act-error")
+                self.classList.add("update-form-out2")
+                setTimeout(() => {
+                    self.parentNode.removeChild(self);
+                    delItemBack(self.getAttribute('id'))
+                }, 300);
+            }
+
+        })
     }, [data, props.id, url, url_suivi, numero_suivi, form]);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     /**
@@ -88,20 +105,20 @@ const OnlineItem = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // send a request to delete the ressouce in BDD
-    // const delItemBack = id => {
-    //     fetch(`http://apires.localhost/src/Del.php?id=${id}`)
-    //         .then( res => {
-    //             return res.json()
-    //         })
-    //         .then( res => {
-    //             if(res[0] !== "succes"){
-    //                 alert("error when deleting")
-    //             }
-    //         })
-    //         .catch(error => {
-    //             alert(error)
-    //         })
-    // }
+    const delItemBack = id => {
+        fetch(`http://apires.localhost/src/Del.php?id=${id}`)
+            .then( res => {
+                return res.json()
+            })
+            .then( res => {
+                if(res[0] !== "succes"){
+                    alert("error when deleting")
+                }
+            })
+            .catch(error => {
+                alert(error)
+            })
+    }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // unmount the UpdateForm Component
@@ -111,7 +128,7 @@ const OnlineItem = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
     return(
-    <Grid id={props.id} item xs={9}>
+    <Grid id={props.id} item xs={9} className="container-online-card">
         <div className="online-card">
             <Grid container justify="center" alignItems="center">
                 <Grid className={style.center} item xs={12}>
@@ -124,7 +141,7 @@ const OnlineItem = props => {
                 { livraisonRef.current && url_suiviRef.current ?
                 <Grid container justify="center" alignItems="center" spacing={1}>
                     <Grid className={style.center} item xs={12}>
-                        <p>Livraison en cour depuis <b>{props.nbr_jour}</b> jour</p>  
+                        <p>Livraison en cour depuis <b>{props.nbr_jour ? props.nbr_jour : "aujourd'hui"}</b> jour</p>  
                     </Grid>
                     <Grid className={style.center} item xs={4}>
                         <h5><a href={url_suivi}>Suivi de Colis</a></h5> 
@@ -137,7 +154,7 @@ const OnlineItem = props => {
                     
                 : livraisonRef.current ?
                 <Grid className={style.center} item xs={12}>
-                    <p>Livraison en cour depuis <b>{props.nbr_jour}</b> jour</p> 
+                    <p>Livraison en cour depuis <b>{props.nbr_jour ? props.nbr_jour : "aujourd'hui"}</b> {props.nbr_jour ? "jours" : null}</p> 
                 </Grid>
                     : null
                 }

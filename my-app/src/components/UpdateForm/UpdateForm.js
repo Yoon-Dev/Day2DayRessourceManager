@@ -22,8 +22,7 @@ const UpdateForm = props => {
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-start",
-            left: "0",
-            transform: "scale(0)"
+            left: "0"
         },
         positionitem: {
             display: "flex",
@@ -54,31 +53,38 @@ const UpdateForm = props => {
     useEffect(() => {
         
         const self = document.querySelector(`#form${props.data.id}`)
+        console.log("MOunt")
+        setTimeout(() => {
+            self.classList.remove("update-form-out") 
+            self.classList.remove("update-form-out2") 
+        }, 1);
         console.log(self.classList)
-        // self.classList.remove("update-form-out")
-        self.classList.add("update-form-in")
         return () => {
-            console.log("return")
+            setTimeout(() => {
+                
+            }, 1);  
+            console.log("UnMOunt")
+            console.log(self.classList)
         };
+
     }, [props.data.id]);
 
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // remove the component
     const remove = () => {
+
         const self = document.querySelector(`#form${props.data.id}`)
-        self.classList.remove("update-form-in")
-        // self.classList.add("update-form-out")
         focusOut()
         props.changeUrl(getInputValue("url"))
         props.changeUrl_suivi(getInputValue("url_suivi"))
         props.changeNumero_suivi(getInputValue("numero_suivi"))
-        // setUrl(getInputValue("url"))
-        // setUrl_suivi(getInputValue("url_suivi"))
-        // setNumero_suivi(getInputValue("numero_suivi"))
+        self.classList.add("update-form-out2")
         setTimeout(() => {
-            props.rm()
-        }, delay.current);
+            console.log("rm")
+            props.rm()   
+        }, 500);  
+
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -156,23 +162,28 @@ const UpdateForm = props => {
         const inputs = document.querySelectorAll('.form-input')
         inputs.forEach(el => {
             let typeinput = el.getAttribute('id')
+            
             if(ref.current.get(typeinput) !== getInputValue(typeinput)){
                 // send BDD request
-                let idbis = el.closest(`#form${props.data.id}`).getAttribute('data-bdd')
-                // typeinput && id send request
-                fetch(`http://apires.localhost/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
-                .then( res => {
-                    return res.json()
-                })
-                .then( res => {
-                    if(res[0] !== "succes"){
-                        alert("error when updating")
-                    }
-                })
-                .catch(error => {
-                    alert(error)
-                })
+                if(el.closest(`#form${props.data.id}`)){
+                    let idbis = el.closest(`#form${props.data.id}`).getAttribute('data-bdd')
+                
+                
+                    // typeinput && id send request
+                    fetch(`http://apires.localhost/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
+                    .then( res => {
+                        return res.json()
+                    })
+                    .then( res => {
+                        if(res[0] !== "succes"){
+                            alert("error when updating")
+                        }
+                    })
+                    .catch(error => {
+                        alert(error)
+                    })
                 }
+            }
         })
 
     }
@@ -180,7 +191,7 @@ const UpdateForm = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
         
-            <div id={`form${props.data.id}`} className={`${style.el} online-card`} data-bdd={props.data.id}>
+            <div id={`form${props.data.id}`} className={`${style.el} update-form-out online-card`} data-bdd={props.data.id}>
                 <Grid container justify="center" alignItems="center" className={style.container}>
                     <Grid className={style.endposition} item xs={12}>
                         <IconButton aria-label="clear-form" onClick={remove} className={style.bs}>
