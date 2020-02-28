@@ -24,7 +24,7 @@ const AppNavigation = props => {
     useEffect(() => {
       const self = document.querySelector('#navbar')
       self.style.height = `${self.offsetHeight}px`
-    });
+    }, []);
     let url = useLocation() 
     return(
         <div className={props.lock === url.pathname ? style.lock+" appnavigation" : "appnavigation"} id="navbar">

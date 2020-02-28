@@ -25,7 +25,7 @@ p:focus{
 .hide{
   opacity: 0;
   transform: skewX(10deg) translateY(10px) scaleY(.5);
-  height: 0px;
+  height: 0px !important;
 }
 
 .view{
