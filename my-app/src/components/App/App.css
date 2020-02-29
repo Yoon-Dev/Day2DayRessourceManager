@@ -23,7 +23,7 @@ p:focus{
 }
 
 .hide{
-  opacity: 0;
+  opacity: 0 !important;
   transform: skewX(10deg) translateY(10px) scaleY(.5);
   height: 0px !important;
 }
@@ -35,7 +35,6 @@ p:focus{
   align-items: center;
   position: absolute;
   min-width: 100vw;
-  background: #EEEEEE;
 }
 
 .appnavigation{

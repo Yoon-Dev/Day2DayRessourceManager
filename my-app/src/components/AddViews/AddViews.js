@@ -1,6 +1,7 @@
 import React,  { useEffect, useRef, useState }  from "react";
 import Hammer from 'hammerjs';
 import './AddViews.css';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 // component
 import AddReal from '../AddReal/AddReal';
 import AddOnline from '../AddOnline/AddOnline';
@@ -9,6 +10,18 @@ import Online from '../Online/Online';
 import BtnMap from '../BtnMap/BtnMap';
 
 const AddViews = props => {
+    const delay = useRef(1000)
+    const useStyles = makeStyles( () => createStyles({
+        transition: {
+            transition: `all ${delay.current}ms cubic-bezier(0.55, 0.06, 0.68, 0.19)`,
+            opacity: "0",
+            backgroundColor: "#C2B548"
+        },
+        p: {
+            padding: "0px 20px"
+        }
+      }));
+    const style = useStyles();
 
     const [current, setCurrent] = useState(0);
     const Dynamic = [AddReal, AddOnline, Real, Online]
@@ -81,6 +94,26 @@ const AddViews = props => {
     }, []);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// transition
+    useEffect(() => {
+        const self = document.querySelector("#transi")
+        const reverse = Object.assign([], self.childNodes).reverse()
+        console.log(reverse)
+        
+        console.log(typeof(delay.current))
+        self.style.backgroundColor = "#EEEEEE"
+        self.style.opacity = 1
+
+        reverse.forEach((el, i) => {
+            el.style.opacity = 0
+            console.log(i)
+            setTimeout(() => {
+                el.style.opacity = 1
+            }, (i+1)*(delay.current/3));
+        })       
+    }, []);
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // do the navigation with btn
     const nav = target => {
 
@@ -102,7 +135,7 @@ const AddViews = props => {
 
     
     return(
-        <div>
+        <div className={style.transition} id="transi"> 
             <div id="views">
             { firstComponent }
             { secondComponent }
