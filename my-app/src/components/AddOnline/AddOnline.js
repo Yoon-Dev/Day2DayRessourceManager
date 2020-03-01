@@ -28,7 +28,7 @@ const throwData = () => {
   let url = document.querySelector(`#${urlid.current}`).value
   let nom = document.querySelector(`#${nomid.current}`).value
 if(url && nom){
-    fetch(`http://apid2d.pierre-monier.com/src/OnlineAdd.php?nom=${nom}&url=${url}`).then(() =>{
+    fetch(`https://apid2d.pierre-monier.com/src/OnlineAdd.php?nom=${nom}&url=${url}`).then(() =>{
     setSend(true)
     document.querySelector(`#${urlid.current}`).value = ""
     document.querySelector(`#${nomid.current}`).value = ""

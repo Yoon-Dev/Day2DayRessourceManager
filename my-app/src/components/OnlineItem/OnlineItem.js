@@ -106,7 +106,7 @@ const OnlineItem = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // send a request to delete the ressouce in BDD
     const delItemBack = id => {
-        fetch(`http://apid2d.pierre-monier.com/src/Del.php?id=${id}`)
+        fetch(`https://apid2d.pierre-monier.com/src/Del.php?id=${id}`)
             .then( res => {
                 return res.json()
             })

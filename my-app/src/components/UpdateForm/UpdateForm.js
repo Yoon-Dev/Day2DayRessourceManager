@@ -102,7 +102,7 @@ const UpdateForm = props => {
                 props.udLivraison(1)
 
                 // backend update
-                fetch(`http://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=add&id=${id}`)
+                fetch(`https://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=add&id=${id}`)
                 .then( res => {
                     return res.json()
                 })
@@ -121,7 +121,7 @@ const UpdateForm = props => {
                 // parent ud component
                 props.udLivraison(null)
                 // backend update
-                fetch(`http://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=remove&id=${id}`)
+                fetch(`https://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=remove&id=${id}`)
                 .then( res => {
                     return res.json()
                 })
@@ -163,7 +163,7 @@ const UpdateForm = props => {
                 
                 
                     // typeinput && id send request
-                    fetch(`http://apid2d.pierre-monier.com/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
+                    fetch(`https://apid2d.pierre-monier.com/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
                     .then( res => {
                         return res.json()
                     })

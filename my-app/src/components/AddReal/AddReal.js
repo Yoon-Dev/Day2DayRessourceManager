@@ -39,7 +39,7 @@ const AddReal = () => {
 
     let data = document.querySelector(`#${dataid.current}`).value
     if(data){
-      fetch('http://apid2d.pierre-monier.com/src/RealAdd.php?nom='+data).then(() =>{
+      fetch('https://apid2d.pierre-monier.com/src/RealAdd.php?nom='+data).then(() =>{
       setSend(true)
       setValue('')
       document.querySelector(`#${dataid.current}`).value = ''
