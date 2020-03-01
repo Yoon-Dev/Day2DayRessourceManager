@@ -3,4 +3,4 @@ Options -MultiViews
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.html [QSA,L]
     RewriteCond %{SERVER_PORT} 80
-    RewriteRule ^(.*)$ https://www.d2d.pierre-monier.com/$1 [R,L]
+    RewriteRule ^(.*)$ https://d2d.pierre-monier.com/$1 [R,L]

@@ -15,7 +15,7 @@ const Item = props => {
         rm: {
             opacity: 0,
             height: 0,
-            transform: "translateX(100px)",
+            transform: "translate3d(100px, 0px, 0px)",
             fontStyle: "italic"
         },
         el: {

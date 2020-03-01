@@ -39,7 +39,7 @@ const AddViews = props => {
 
         views.forEach((el, i) => {
             let x = (window.innerWidth * (i))
-            el.style.transform = "translateX("+x+"px)";
+            el.style.transform = "translate3d("+x+"px, 0px, 0px)";
         })
         
         const hammer = new Hammer(app) 
@@ -49,11 +49,11 @@ const AddViews = props => {
             if(ref.current === (views.length - 1)){
                 if(Math.abs(e.deltaX) < (window.innerWidth/2)){
                     document.querySelector("#views").classList.add("no-transi")
-                    document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
+                    document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
                   }  
             }else{
                 document.querySelector("#views").classList.add("no-transi")
-                document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
+                document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
             }
 
         })
@@ -63,11 +63,11 @@ const AddViews = props => {
             if(ref.current === 0){
                 if(Math.abs(e.deltaX) < (window.innerWidth/2)){
                     document.querySelector("#views").classList.add("no-transi")
-                    document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
+                    document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
                   }  
             }else{
                 document.querySelector("#views").classList.add("no-transi")
-                document.querySelector("#views").style.transform = "translateX("+tsl_current+"px)";
+                document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
             }
 
         })
@@ -79,7 +79,7 @@ const AddViews = props => {
             if(Math.abs(e.deltaX) > (window.innerWidth/3) && ref.current < (nbr_views.current -1) && e.deltaX < 0){
               nav(ref.current+1)
             }else if(e.deltaX < 0){
-                document.querySelector("#views").style.transform = "translateX("+(-ref.current) * window.innerWidth+"px)";     
+                document.querySelector("#views").style.transform = "translate3d("+(-ref.current) * window.innerWidth+"px, 0px, 0px)";     
             }
             // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
             // Gauche
@@ -87,7 +87,7 @@ const AddViews = props => {
                 nav(ref.current-1)
             }else if(e.deltaX > 0){
                 // premiere page
-                document.querySelector("#views").style.transform = "translateX("+(-ref.current) * window.innerWidth+"px)";
+                document.querySelector("#views").style.transform = "translate3d("+(-ref.current) * window.innerWidth+"px, 0px, 0px)";
             }
           })
 
@@ -117,7 +117,7 @@ const AddViews = props => {
 
         let destination = -target * window.innerWidth
 
-        document.querySelector('#views').style.transform = "translateX("+destination+"px)";
+        document.querySelector('#views').style.transform = "translate3d("+destination+"px, 0px, 0px)";
         ref.current = target
         setCurrent(target)
 
