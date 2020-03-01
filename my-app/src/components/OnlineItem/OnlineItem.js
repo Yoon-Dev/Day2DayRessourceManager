@@ -39,6 +39,7 @@ const OnlineItem = props => {
         const url_suiviRef = useRef(url_suivi)
         const numero_suiviRef = useRef(numero_suivi)
         const livraisonRef = useRef(livraison)
+
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // set hammerjs event 
@@ -105,7 +106,7 @@ const OnlineItem = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° 
 // send a request to delete the ressouce in BDD
     const delItemBack = id => {
-        fetch(`http://apires.localhost/src/Del.php?id=${id}`)
+        fetch(`http://apid2d.pierre-monier.com/src/Del.php?id=${id}`)
             .then( res => {
                 return res.json()
             })
@@ -138,9 +139,9 @@ const OnlineItem = props => {
                 </Grid>
                 { form ? form : null }        
                 { livraisonRef.current && url_suiviRef.current ?
-                <Grid container justify="center" alignItems="center" spacing={1}>
+                <Grid container justify="center" alignItems="center">
                     <Grid className={style.center} item xs={12}>
-                        <p>Livraison en cour depuis <b>{props.nbr_jour ? props.nbr_jour : "aujourd'hui"}</b> jour</p>  
+                        <p>Livraison en cour depuis <b>{props.nbr_jour && props.nbr_jour !== "0" ? `${props.nbr_jour} jours` : "aujourd'hui"}</b></p>  
                     </Grid>
                     <Grid className={style.center} item xs={4}>
                         <h5><a href={url_suivi}>Suivi de Colis</a></h5> 

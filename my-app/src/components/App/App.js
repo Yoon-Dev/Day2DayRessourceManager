@@ -21,17 +21,12 @@ const App = () => {
   useEffect(() => {
     
     window.addEventListener('wheel', e => {
-      // new document.body.scrollTop
-      // olds crollRef.current
-      // console.log(`REF : ${scrollRef.current} CURRENT : ${document.body.scrollTop}`)
+
       const btmap = document.querySelector("#btns")
       const navbar = document.querySelector("#navbar")
-      console.log(`btn : ${btmap} navbar : ${navbar}`)
       if(document.body.scrollTop > scrollRef.current && document.body.scrollTop !== scrollRef.current){
         
         if(verifRef.current !== "down"){
-          console.log("DOWN")
-          console.log("hide stuff")
           btmap.classList.add('hide')
           navbar.classList.add('hide')
         }
@@ -39,8 +34,6 @@ const App = () => {
       }else if(document.body.scrollTop !== scrollRef.current){
 
         if(verifRef.current !== "up"){
-          console.log("UP")
-          console.log("show stuff")
           btmap.classList.remove('hide')
           navbar.classList.remove('hide')
         }

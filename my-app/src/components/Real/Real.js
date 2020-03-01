@@ -20,7 +20,7 @@ const Real = props => {
 
     useEffect(() => {
            
-        fetch("http://apires.localhost/src/RealSelect.php")
+        fetch("http://apid2d.pierre-monier.com/src/RealSelect.php")
             .then( res => {
                 return res.json()
             }) 

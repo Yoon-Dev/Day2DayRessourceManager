@@ -98,15 +98,13 @@ const AddViews = props => {
     useEffect(() => {
         const self = document.querySelector("#transi")
         const reverse = Object.assign([], self.childNodes).reverse()
-        console.log(reverse)
-        
-        console.log(typeof(delay.current))
+
         self.style.opacity = 1
         self.style.filter = "blur(0)"
 
         reverse.forEach((el, i) => {
             el.style.opacity = 0
-            console.log(i)
+
             setTimeout(() => {
                 el.style.opacity = 1
             }, (i+1)*(delay.current/3));

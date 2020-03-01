@@ -53,18 +53,15 @@ const UpdateForm = props => {
     useEffect(() => {
         
         const self = document.querySelector(`#form${props.data.id}`)
-        console.log("MOunt")
         setTimeout(() => {
             self.classList.remove("update-form-out") 
             self.classList.remove("update-form-out2") 
         }, 1);
-        console.log(self.classList)
         return () => {
             setTimeout(() => {
                 
             }, 1);  
-            console.log("UnMOunt")
-            console.log(self.classList)
+
         };
 
     }, [props.data.id]);
@@ -81,7 +78,6 @@ const UpdateForm = props => {
         props.changeNumero_suivi(getInputValue("numero_suivi"))
         self.classList.add("update-form-out2")
         setTimeout(() => {
-            console.log("rm")
             props.rm()   
         }, 500);  
 
@@ -106,7 +102,7 @@ const UpdateForm = props => {
                 props.udLivraison(1)
 
                 // backend update
-                fetch(`http://apires.localhost/src/OnlineLivraison.php?type=add&id=${id}`)
+                fetch(`http://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=add&id=${id}`)
                 .then( res => {
                     return res.json()
                 })
@@ -125,7 +121,7 @@ const UpdateForm = props => {
                 // parent ud component
                 props.udLivraison(null)
                 // backend update
-                fetch(`http://apires.localhost/src/OnlineLivraison.php?type=remove&id=${id}`)
+                fetch(`http://apid2d.pierre-monier.com/src/OnlineLivraison.php?type=remove&id=${id}`)
                 .then( res => {
                     return res.json()
                 })
@@ -167,7 +163,7 @@ const UpdateForm = props => {
                 
                 
                     // typeinput && id send request
-                    fetch(`http://apires.localhost/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
+                    fetch(`http://apid2d.pierre-monier.com/src/OnlineUpdateSolo.php?type=${typeinput}&value=${getInputValue(typeinput)}&id=${idbis}`)
                     .then( res => {
                         return res.json()
                     })
