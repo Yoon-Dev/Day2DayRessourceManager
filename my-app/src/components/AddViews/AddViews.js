@@ -10,12 +10,12 @@ import Online from '../Online/Online';
 import BtnMap from '../BtnMap/BtnMap';
 
 const AddViews = props => {
-    const delay = useRef(1000)
+    const delay = useRef(600)
     const useStyles = makeStyles( () => createStyles({
         transition: {
             transition: `all ${delay.current}ms cubic-bezier(0.55, 0.06, 0.68, 0.19)`,
             opacity: "0",
-            backgroundColor: "#C2B548"
+            filter: "blur(25px)"
         },
         p: {
             padding: "0px 20px"
@@ -101,8 +101,8 @@ const AddViews = props => {
         console.log(reverse)
         
         console.log(typeof(delay.current))
-        self.style.backgroundColor = "#EEEEEE"
         self.style.opacity = 1
+        self.style.filter = "blur(0)"
 
         reverse.forEach((el, i) => {
             el.style.opacity = 0
