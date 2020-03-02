@@ -28,7 +28,6 @@ const AddViews = props => {
     const [firstComponent] = useState(React.createElement(Dynamic[props.comp1], null, null));
     const [secondComponent] = useState(React.createElement(Dynamic[props.comp2], null, null));
     const ref = useRef(current);
-    const nbr_views = useRef(2)
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // display the view and add hammer js event
@@ -43,53 +42,12 @@ const AddViews = props => {
         })
         
         const hammer = new Hammer(app) 
-        hammer.on('panleft', e => {
-
-            let tsl_current = (-ref.current * window.innerWidth) + e.deltaX
-            if(ref.current === (views.length - 1)){
-                if(Math.abs(e.deltaX) < (window.innerWidth/2)){
-                    document.querySelector("#views").classList.add("no-transi")
-                    document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
-                  }  
-            }else{
-                document.querySelector("#views").classList.add("no-transi")
-                document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
-            }
-
+        hammer.on('swipeleft', e => {
+            nav(ref.current+1)
         })
-        hammer.on('panright', e => {
-
-            let tsl_current = (-ref.current * window.innerWidth) + e.deltaX
-            if(ref.current === 0){
-                if(Math.abs(e.deltaX) < (window.innerWidth/2)){
-                    document.querySelector("#views").classList.add("no-transi")
-                    document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
-                  }  
-            }else{
-                document.querySelector("#views").classList.add("no-transi")
-                document.querySelector("#views").style.transform = "translate3d("+tsl_current+"px, 0px, 0px)";
-            }
-
+        hammer.on('swiperight', e => {
+            nav(ref.current-1)
         })
-        hammer.on("panend", (e) => {
-          
-            document.querySelector("#views").classList.remove("no-transi")
-            // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-            // Droite
-            if(Math.abs(e.deltaX) > (window.innerWidth/3) && ref.current < (nbr_views.current -1) && e.deltaX < 0){
-              nav(ref.current+1)
-            }else if(e.deltaX < 0){
-                document.querySelector("#views").style.transform = "translate3d("+(-ref.current) * window.innerWidth+"px, 0px, 0px)";     
-            }
-            // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-            // Gauche
-            if(Math.abs(e.deltaX) > (window.innerWidth/3) && ref.current > 0 && e.deltaX > 0){
-                nav(ref.current-1)
-            }else if(e.deltaX > 0){
-                // premiere page
-                document.querySelector("#views").style.transform = "translate3d("+(-ref.current) * window.innerWidth+"px, 0px, 0px)";
-            }
-          })
 
     }, []);
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -116,10 +74,11 @@ const AddViews = props => {
     const nav = target => {
 
         let destination = -target * window.innerWidth
-
-        document.querySelector('#views').style.transform = "translate3d("+destination+"px, 0px, 0px)";
-        ref.current = target
-        setCurrent(target)
+        if(target >= 0 && target < 2 ){
+            document.querySelector('#views').style.transform = "translate3d("+destination+"px, 0px, 0px)";
+            ref.current = target
+            setCurrent(target)
+        }
 
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
