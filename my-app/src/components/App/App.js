@@ -62,7 +62,7 @@ const App = () => {
   return (
       <div id="App">  
         <Router>
-          <AppNavigation lock="/list/wishlist"/>
+          <AppNavigation lock="/list/wishlist/"/>
           <Switch>
             <Route path="/list">
               <List />
